@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,15 +28,17 @@ function parseCellsFile(content) {
 
     // Parse grid rows
     const row = line.split("").map((char) => (char === "O" ? 1 : 0));
-    rows .push(row);
+    rows.push(row);
   }
 
   // Determine the size of the uniform matrix (maximum row length)
   const maxLength = Math.max(...rows.map((row) => row.length));
 
-   // Pad each row to match the maximum length
+  // Pad each row to match the maximum length
   const pattern = rows.map((row) => {
-    while (row.length < maxLength) row.push(0); // Add zeros for padding
+    while (row.length < maxLength) {
+      row.push(0);
+    } // Add zeros for padding
     return row;
   });
 
@@ -72,9 +74,7 @@ function main() {
     }
   }
 
-  const tsObject = `export const patterns = ${JSON.stringify(
-    patterns
-  )}`;
+  const tsObject = `export const patterns = ${JSON.stringify(patterns)}`;
 
   const outputDir = path.dirname(outputPath);
 

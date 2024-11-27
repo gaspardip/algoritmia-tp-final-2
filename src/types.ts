@@ -1,3 +1,3 @@
 export type Pattern = number[][];
 
-export type GridState = boolean[][];
+export type CellCoordinates = `${number},${number}`;

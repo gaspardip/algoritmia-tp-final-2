@@ -1,4 +1,7 @@
-import type { GridState } from "./types";
+import type { CellCoordinates } from "./types";
+
+export const serialize = (x: number, y: number): CellCoordinates => `${x},${y}`;
+export const deserialize = (coord: CellCoordinates) => coord.split(",").map(Number);
 
 // possible directions to check for neighbors
 const dirs = [
@@ -12,44 +15,81 @@ const dirs = [
   [-1, 1],
 ];
 
-export const countNeighbors = (grid: GridState, x: number, y: number) => {
-  const gridSize = grid.length;
+export const calculateNextGeneration = (currentLiveCells: Set<CellCoordinates>, gridSize: number) => {
+  const newLiveCells = new Set<CellCoordinates>();
+  const cellsToEvaluate = new Set<CellCoordinates>();
 
-  let count = 0;
+  for (const cell of currentLiveCells) {
+    const [x, y] = deserialize(cell);
 
-  for (const [dx, dy] of dirs) {
-    const newX = x + dx;
-    const newY = y + dy;
-    if (
-      newX >= 0 &&
-      newX < gridSize &&
-      newY >= 0 &&
-      newY < gridSize &&
-      grid[newX][newY]
-    ) {
-      count++;
+    // Add the current live cell
+    cellsToEvaluate.add(cell);
+
+    // Add neighbors
+    for (const [dx, dy] of dirs) {
+      const neighborX = x + dx;
+      const neighborY = y + dy;
+
+      if (
+        neighborX >= 0 &&
+        neighborX < gridSize &&
+        neighborY >= 0 &&
+        neighborY < gridSize
+      ) {
+        const neighborCoord = serialize(neighborX, neighborY);
+        cellsToEvaluate.add(neighborCoord);
+      }
     }
   }
 
-  return count;
+  for (const cell of cellsToEvaluate) {
+    const [x, y] = deserialize(cell);
+
+    const isAlive = currentLiveCells.has(cell);
+
+    let count = 0;
+
+    for (const [dx, dy] of dirs) {
+      const neighborX = x + dx;
+      const neighborY = y + dy;
+      if (
+        neighborX >= 0 &&
+        neighborX < gridSize &&
+        neighborY >= 0 &&
+        neighborY < gridSize
+      ) {
+        const neighborCoord = serialize(neighborX, neighborY);
+        if (currentLiveCells.has(neighborCoord)) {
+          count++;
+        }
+      }
+    };
+
+    if (isAlive && (count === 2 || count === 3)) {
+      newLiveCells.add(cell);
+    } else if (!isAlive && count === 3) {
+      newLiveCells.add(cell);
+    }
+  };
+
+  return newLiveCells;
 };
 
-export const generateEmptyGrid = (size: number) => {
-  const grid = Array.from({ length: size }, () =>
-    Array.from({ length: size }, () => false)
-  );
+export const generateRandomGrid = (gridSize: number) => {
+  const newLiveCells = new Set<CellCoordinates>();
 
-  return grid;
+  for (let x = 0; x < gridSize; x++) {
+    for (let y = 0; y < gridSize; y++) {
+      if (Math.random() > 0.5) {
+        const coord = serialize(x, y);
+        newLiveCells.add(coord);
+      }
+    }
+  }
+
+  return newLiveCells;
 }
 
-export const generateRandomGrid = (size: number) => {
-  const grid = Array.from({ length: size }, () =>
-    Array.from({ length: size }, () => Math.random() > 0.5)
-  );
-
-  return grid;
-}
-
-export const isGridEmpty = (grid: GridState) => {
-  return grid.every((row) => row.every((cell) => !cell));
+export const isGridEmpty = (grid: Set<CellCoordinates>) => {
+  return grid.size === 0;
 }

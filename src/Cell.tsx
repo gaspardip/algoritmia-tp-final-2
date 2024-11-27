@@ -4,23 +4,23 @@ import { memo } from 'react';
 interface CellProps {
   x: number;
   y: number;
-  alive: boolean;
+  isAlive: boolean;
   onClick: (x: number, y: number) => void;
 }
 
 export const Cell = memo(
-  ({ x, y, alive, onClick }: CellProps) => {
+  ({ x, y, isAlive, onClick }: CellProps) => {
     return (
       <button
         type="button"
         onClick={() => onClick(x, y)}
         className={clsx("w-full h-full", {
-          "bg-black": !alive,
-          "bg-white": alive
+          "bg-black": !isAlive,
+          "bg-white": isAlive
         })}
       />
     );
   },
-  (prevProps, nextProps) => prevProps.alive === nextProps.alive
+  (prevProps, nextProps) => prevProps.isAlive === nextProps.isAlive
 );
 

@@ -87,6 +87,8 @@
     }
   },
   "files": {
+    "include": ["src"],
+    "ignore": ["src/data/patterns.ts"],
     "ignoreUnknown": true
   },
   "css": {
