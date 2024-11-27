@@ -44,7 +44,7 @@ export const PatternsCombobox = memo(({
         <PopoverTrigger asChild>
           <Button
             aria-expanded={open}
-            className="w-full justify-between truncate"
+            className="w-60 justify-between truncate"
             disabled={disabled}
             // biome-ignore lint/a11y/useSemanticElements: the button is used as a combobox trigger
             role="combobox"
@@ -56,7 +56,7 @@ export const PatternsCombobox = memo(({
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-full p-0">
+        <PopoverContent className="w-60 p-0">
           <Command>
             <CommandInput
               placeholder="Buscar patrón..."
@@ -64,7 +64,7 @@ export const PatternsCombobox = memo(({
               value={searchQuery}
               onValueChange={setSearchQuery}
             />
-            <CommandList>
+            <CommandList className="no-scrollbar">
               <CommandEmpty>No se encontró ningun patrón.</CommandEmpty>
               <CommandGroup>
                 {patterns.map(({ name, pattern }) => (
@@ -96,7 +96,7 @@ export const PatternsCombobox = memo(({
         </PopoverContent>
       </Popover>
       <Button
-        className="w-24"
+        className="flex-1"
         disabled={!selectedPattern}
         onClick={() => {
           if (selectedPattern) {

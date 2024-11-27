@@ -170,7 +170,7 @@ export const App = () => {
         </CardHeader>
         <CardContent className="flex flex-col gap-8">
           <div className="flex items-center">
-            <Label className="w-1/2" htmlFor="grid-size">
+            <Label className="w-1/2 text-lg font-semibold" htmlFor="grid-size">
               Tamaño de la grilla:
             </Label>
             <Select
