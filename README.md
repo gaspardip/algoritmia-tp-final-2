@@ -41,3 +41,25 @@ Más información sobre el **Juego de la Vida de Conway**: [Wikipedia](https://e
 - https://conwaylife.com/wiki/
 - https://www.youtube.com/watch?v=Kk2MH9O4pXY
 - https://www.youtube.com/watch?v=ouipbDkwHWA
+
+## Consideraciones técnicas
+
+Decidí utilizar **React + TypeScript + Vite** para la realización de este trabajo práctico. No es muy performante la forma en la que se renderiza la grilla, pero es una buena forma de mostrar cómo se comporta el juego de la vida en un entorno web.
+
+Algunas mejoras potenciales serían:
+
+- Utilizar **Web Workers** para realizar los cálculos de las generaciones en un thread aparte.
+- Utilizar **Canvas** para renderizar la grilla, en lugar de instancias del componente `Cell`. Tambien se podría utilizar **SVG** o **WebGL**. Para grillas muy grandes, esto sería mucho más performante. Actualmente se renderiza un componente por cada celda, lo cual no es muy performante. Por ejemplo para una grilla de `200x200`, se renderizan 40.000 componentes, y 40.000 elementos en el DOM. Esto es MUY ineficiente pero es suficiente para mostrar el funcionamiento del juego de la vida.
+- Utilizar algun **state management** para manejar el estado de la aplicación y evitar la re-renderización constante de `App`.
+- Mejorar la **responsividad** de la aplicación.
+- Mejorar la **accesibilidad** de la aplicación.
+
+Aun así, se realizaron algunas optimizaciones para mejorar la performance de la aplicación:
+
+- Uso de un `Set` para almacenar células vivas en vez de una matriz de `boolean`. Esto permite realizar operaciones de forma más eficiente.
+- Se utiliza **memoization** para evitar re-renderizaciones innecesarias de los componentes (por ejemplo, `Cell`).
+- Optimización del cálculo de la siguiente generación. Se evita recorrer toda la grilla en cada generación, y se calculan solo las celdas que pueden cambiar de estado.
+- Uso de `requestAnimationFrame` para actualizaciones sincronizadas.
+- Limitación de generaciones por frame. Si el cálculo de las generaciones tarda mucho, se limita la cantidad de generaciones que se calculan por frame para evitar bloquear la UI.
+
+Con estas optimizaciones, la aplicación es capaz de demostrar el funcionamiento del juego de la vida de forma aceptable. Para manejar grillas muy grandes forma eficiente, se deberían implementar las mejoras mencionadas anteriormente.
