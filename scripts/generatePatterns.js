@@ -22,12 +22,15 @@ function parseCellsFile(content) {
       continue;
     }
 
-    if (!line.trim()) {
+    if (line.trim().length === 0 && lines.indexOf(line) !== lines.length - 1) {
+      // Add empty row, had some issues with some patterns like Pulsar otherwise
+      rows.push([0]);
       continue;
     }
 
     // Parse grid rows
     const row = line.split("").map((char) => (char === "O" ? 1 : 0));
+
     rows.push(row);
   }
 
