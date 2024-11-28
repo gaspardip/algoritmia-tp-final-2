@@ -34,3 +34,8 @@ Sorprendentemente, con estas reglas simples, el juego genera patrones complejos 
 
 Más información sobre el **Juego de la Vida de Conway**: [Wikipedia](https://es.wikipedia.org/wiki/Juego_de_la_vida).
 
+## Recursos
+
+- https://conwaylife.com/wiki/
+- https://www.youtube.com/watch?v=Kk2MH9O4pXY
+- https://www.youtube.com/watch?v=ouipbDkwHWA
