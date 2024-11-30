@@ -38,9 +38,12 @@ Más información sobre el **Juego de la Vida de Conway**: [Wikipedia](https://e
 
 ## Recursos
 
-- https://conwaylife.com/wiki/
+- https://conwaylife.com/wiki
 - https://www.youtube.com/watch?v=Kk2MH9O4pXY
 - https://www.youtube.com/watch?v=ouipbDkwHWA
+- https://en.wikipedia.org/wiki/Hashlife
+- https://www.dev-mind.blog/hashlife
+- https://www.drdobbs.com/jvm/an-algorithm-for-compressing-space-and-t/184406478
 
 ## Consideraciones técnicas
 
@@ -48,6 +51,7 @@ Decidí utilizar **React + TypeScript + Vite** para la realización de este trab
 
 Algunas mejoras potenciales serían:
 
+- Implementar el algoritmo **Hashlife** para optimizar el cálculo de las generaciones. Esto permitiría manejar grillas muy grandes de forma eficiente.
 - Utilizar **Web Workers** para realizar los cálculos de las generaciones en un thread aparte.
 - Utilizar **Canvas** para renderizar la grilla, en lugar de instancias del componente `Cell`. Tambien se podría utilizar **SVG** o **WebGL**. Para grillas muy grandes, esto sería mucho más performante. Actualmente se renderiza un componente por cada celda, lo cual no es muy performante. Por ejemplo para una grilla de `200x200`, se renderizan 40.000 componentes, y 40.000 elementos en el DOM. Esto es MUY ineficiente pero es suficiente para mostrar el funcionamiento del juego de la vida.
 - Utilizar algun **state management** para manejar el estado de la aplicación y evitar la re-renderización constante de `App`.

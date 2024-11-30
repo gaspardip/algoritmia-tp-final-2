@@ -256,7 +256,7 @@ export const App = () => {
                 return (
                   <Cell
                     key={`${x}-${
-                      // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                      // biome-ignore lint/suspicious/noArrayIndexKey: we build the key using the cell's x and y coordinates in the grid
                       y
                       }`}
                     x={x}
