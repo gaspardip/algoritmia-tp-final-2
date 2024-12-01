@@ -18,8 +18,6 @@ El juego se desarrolla sobre una grilla cuadriculada donde cada cuadrado puede e
 
 Sorprendentemente, con estas reglas simples, el juego genera patrones complejos que pueden ser estáticos, dinámicos o incluso interactuar entre sí.
 
----
-
 ## Consignas
 
 1. **Diagramar un algoritmo** para simular el Juego de la Vida.
@@ -32,18 +30,31 @@ Sorprendentemente, con estas reglas simples, el juego genera patrones complejos 
 6. El programa debe informar cuántas generaciones logró el jugador a partir de su configuración inicial.
 7. **Investigar y sacar conclusiones** acerca del problema del Juego de la Vida.
 
-## Referencia
+---
 
-Más información sobre el **Juego de la Vida de Conway**: [Wikipedia](https://es.wikipedia.org/wiki/Juego_de_la_vida).
+## Diagrama de flujo del algoritmo del Juego de la Vida
 
-## Recursos
+```mermaid
+flowchart TD
+    Start[Inicio]
+    Init[Inicializar la grilla con la configuración inicial]
+    CheckStop[¿Condición de parada cumplida?]
+    Iterate[Para cada célula en la grilla]
+    Count[Contar vecinos vivos]
+    Rules[Aplicar reglas del juego]
+    Update[Actualizar estado en la nueva grilla]
+    Swap[Reemplazar la grilla actual con la nueva]
+    Display[Mostrar la grilla actualizada]
+    End[Fin]
 
-- https://conwaylife.com/wiki
-- https://www.youtube.com/watch?v=Kk2MH9O4pXY
-- https://www.youtube.com/watch?v=ouipbDkwHWA
-- https://en.wikipedia.org/wiki/Hashlife
-- https://www.dev-mind.blog/hashlife
-- https://www.drdobbs.com/jvm/an-algorithm-for-compressing-space-and-t/184406478
+    Start --> Init --> CheckStop
+    CheckStop -->|No| Iterate
+    CheckStop -->|Sí| End
+    Iterate --> Count --> Rules --> Update
+    Update -->|¿Más células por procesar?| Iterate
+    Iterate -->|No| Swap
+    Swap --> Display --> CheckStop
+```
 
 ## Consideraciones técnicas
 
@@ -67,3 +78,13 @@ Aun así, se realizaron algunas optimizaciones para mejorar la performance de la
 - Limitación de generaciones por frame. Si el cálculo de las generaciones tarda mucho, se limita la cantidad de generaciones que se calculan por frame para evitar bloquear la UI.
 
 Con estas optimizaciones, la aplicación es capaz de demostrar el funcionamiento del juego de la vida de forma aceptable. Para manejar grillas muy grandes forma eficiente, se deberían implementar las mejoras mencionadas anteriormente.
+
+## Referencias
+
+- https://es.wikipedia.org/wiki/Juego_de_la_vida
+- https://conwaylife.com/wiki
+- https://www.youtube.com/watch?v=Kk2MH9O4pXY
+- https://www.youtube.com/watch?v=ouipbDkwHWA
+- https://en.wikipedia.org/wiki/Hashlife
+- https://www.dev-mind.blog/hashlife
+- https://www.drdobbs.com/jvm/an-algorithm-for-compressing-space-and-t/184406478
