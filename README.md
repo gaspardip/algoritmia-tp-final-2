@@ -1,6 +1,6 @@
 # Trabajo Práctico 2 - Algoritmia 2024
 
-Demo: https://final-algoritmia-game-of-life.vercel.app
+Demo: https://algoritmia-tp-final-2.vercel.app
 
 ## El Juego de la Vida
 
