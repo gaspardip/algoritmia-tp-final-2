@@ -40,8 +40,8 @@ function parseCellsFile(content) {
   // Pad each row to match the maximum length
   const pattern = rows.map((row) => {
     while (row.length < maxLength) {
-      row.push(0);
-    } // Add zeros for padding
+      row.push(0); // Add zeros for padding
+    }
     return row;
   });
 
