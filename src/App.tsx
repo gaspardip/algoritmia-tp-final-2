@@ -222,11 +222,11 @@ export const App = () => {
             onPatternClick={handlePatternInsert}
           />
           <div className="flex items-center">
-            <Label className="text-lg font-semibold mr-2" htmlFor="velocity">
+            <Label className="text-lg font-semibold mr-2" htmlFor="speed">
               Velocidad: {speed} gen/s
             </Label>
             <Slider
-              id="velocity"
+              id="speed"
               defaultValue={[speed]}
               min={1}
               max={64}
